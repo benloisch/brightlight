@@ -5,3 +5,17 @@ RGB::RGB() {
 	g = 0;
 	b = 0;
 }
+
+RGB& RGB::operator+=(RGB &rhs) {
+	this->r += rhs.r;
+	this->g += rhs.g;
+	this->b += rhs.b;
+	return *this;
+}
+
+RGB& RGB::operator/=(double rhs) {
+	this->r /= rhs;
+	this->g /= rhs;
+	this->b /= rhs;
+	return *this;
+}
