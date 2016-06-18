@@ -7,7 +7,7 @@ using namespace std;
 Author: Ben Loisch
 Version: 0.1
 Date Started: 06/07/2016
-Date Modified: 06/16/2016
+Date Modified: 06/18/2016
 Ray Tracer #3
 
 

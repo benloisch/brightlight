@@ -1,0 +1,7 @@
+﻿  RayTracer.cpp
+RayTracer.cpp(71): warning C4244: '=' : conversion from 'double' to 'int', possible loss of data
+RayTracer.cpp(72): warning C4244: '=' : conversion from 'double' to 'int', possible loss of data
+RayTracer.cpp(73): warning C4244: '=' : conversion from 'double' to 'int', possible loss of data
+  Generating code
+  Finished generating code
+  brightlight_raytracer.vcxproj -> C:\Users\Ben Loisch\Documents\GitHub\Repository\brightlight\brightlight_raytracer\Release\brightlight_raytracer.exe

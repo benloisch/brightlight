@@ -20,6 +20,7 @@ public:
 	unsigned int width;
 	unsigned int height;
 
+	ImageBMP();
 	ImageBMP(unsigned int width, unsigned int height, string fileName);
 	~ImageBMP();
 

@@ -15,7 +15,7 @@ public:
 	ImageBMP bmp;
 	vector<RaytracingObject*> objects;
 
-	RayTracer() : cam(0, 1, -1, 0, 1, 1), bmp(512, 512, "image") {
+	RayTracer() {
 		bmp.setInitialBMPColor(255, 255, 255);
 	}
 	~RayTracer();

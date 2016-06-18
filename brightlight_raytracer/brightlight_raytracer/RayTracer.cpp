@@ -22,48 +22,38 @@ void RayTracer::render() {
 	//convert fov from degrees to radians
 	fov = (3.14159265359 * fov) / 180.0;
 
-	for (unsigned int y = 0; y < bmp.height; y++) {
+	for (unsigned int y = 0; y < bmp.height + 1; y++) {
 		for (unsigned int x = 0; x < bmp.width; x++) {
 			//convert from raster space to normalized device coordinate space
-			double xPixelNDC = (x + 0.5) / bmp.width;
-			double yPixelNDC = (y + 0.5) / bmp.height;
+			//double xPixelNDC = (x + 0.5) / bmp.width;
+			//double yPixelNDC = (y + 0.5) / bmp.height;
 
 			//convert from NDC space to screen space
-			double xPixelScreen = ((2 * xPixelNDC) - 1) * aspectRatio * tan(fov / 2);
-			double yPixelScreen = 1 - (2 * yPixelNDC);
+			//double xPixelScreen = ((2 * xPixelNDC) - 1) * aspectRatio * tan(fov / 2);
+			//double yPixelScreen = 1 - (2 * yPixelNDC);
 
-			Vector primaryRay(xPixelScreen, yPixelScreen, 1, 0);
-			primaryRay.normalize();
+			//Vector primaryRay(xPixelScreen, yPixelScreen, 1, 0);
+			//primaryRay.normalize();
 
 			//find closest object
-			RaytracingObject *object = NULL;
-			double minDepth = DBL_MAX;
-			double depth = DBL_MAX;
-			/*
-			for (unsigned int i = 0; i < objects.size(); i++) {
-				objects[i]->intersectRay(depth, primaryRay, cam);
-				if (depth < minDepth) {
-					object = objects[i];
-				}
-			}
-
-			RGB rgb = bmp.getPixel(x, y);
-
-			if (object != NULL) {
-				rgb = object->getColor();
-			}
-			*/
+			//RaytracingObject *object = NULL;
+			//double minDepth = DBL_MAX;
+			//double depth = DBL_MAX;
 			
-			double xd = double(x);
-			double yd = double(y);
+			//for (unsigned int i = 0; i < objects.size(); i++) {
+			//	objects[i]->intersectRay(depth, primaryRay, cam);
+			//	if (depth < minDepth) {
+			//		object = objects[i];
+			//	}
+			//}
 
-			double value = 0.5 * (1 + sin(xd*xd/2500 * yd*yd/2500));
-			RGB rgb;
-			rgb.r = value * 255;
-			rgb.g = value * 255;
-			rgb.b = value * 255;
+			//RGB rgb = bmp.getPixel(x, y);
 
-			bmp.setPixel(x, y, rgb.r, rgb.g, rgb.b);
+			//if (object != NULL) {
+			//	rgb = object->getColor();
+			//}
+
+			bmp.setPixel(x, y, 0, 0, 0);
 		}
 	}
 

@@ -2,6 +2,12 @@
 
 #include <iostream>
 
+ImageBMP::ImageBMP() {
+	this->width = 800;
+	this->height = 600;
+	this->fileName = "output";
+}
+
 ImageBMP::ImageBMP(unsigned int width, unsigned int height, string fileName) {
 	this->width = width;
 	this->height = height;
@@ -11,41 +17,29 @@ ImageBMP::ImageBMP(unsigned int width, unsigned int height, string fileName) {
 	green = NULL;
 	blue = NULL;
 
-	try {
-	
-		//try to intialize pointers to a pointer array of width * height
-
-		red = new unsigned char*[width];
-		for (unsigned int i = 0; i < width; i++) {
-			red[i] = new unsigned char[height];
-			for (unsigned int j = 0; j < height; j++) {
-				red[i][j] = 0;
-			}
-		}
-
-		green = new unsigned char*[width];
-		for (unsigned int i = 0; i < width; i++) {
-			green[i] = new unsigned char[height];
-			for (unsigned int j = 0; j < height; j++) {
-				green[i][j] = 0;
-			}
-		}
-
-		blue = new unsigned char*[width];
-		for (unsigned int i = 0; i < width; i++) {
-			blue[i] = new unsigned char[height];
-			for (unsigned int j = 0; j < height; j++) {
-				blue[i][j] = 0;
-			}
-		}
-
-		if (red == NULL || green == NULL || blue == NULL) {
-			throw exception("Could not intialize character pointer.");
+	red = new unsigned char*[width];
+	for (unsigned int i = 0; i < width; i++) {
+		red[i] = new unsigned char[height];
+		for (unsigned int j = 0; j < height; j++) {
+			red[i][j] = 0;
 		}
 	}
-	catch (exception &e) {
-		cout << e.what() << endl;
+
+	green = new unsigned char*[width];
+	for (unsigned int i = 0; i < width; i++) {
+		green[i] = new unsigned char[height];
+		for (unsigned int j = 0; j < height; j++) {
+			green[i][j] = 0;
+		}
 	}
+
+	blue = new unsigned char*[width];
+	for (unsigned int i = 0; i < width; i++) {
+		blue[i] = new unsigned char[height];
+		for (unsigned int j = 0; j < height; j++) {
+			blue[i][j] = 0;
+		}
+	}	
 }
 
 ImageBMP::~ImageBMP() {
@@ -147,16 +141,6 @@ bool ImageBMP::saveBMP() {
 }
 
 void ImageBMP::setPixel(unsigned int x, unsigned int y, unsigned char r, unsigned char g, unsigned char b) {
-	if (x >= width) {
-		cout << "x in setPixel() cannot be greater than width of image" << endl;
-		return;
-	}
-	
-	if (y >= height) {
-		cout << "y in setPixel() cannot be greater than height of image" << endl;
-		return;
-	}
-
 	red[x][y] = r;
 	green[x][y] = g;
 	blue[x][y] = b;

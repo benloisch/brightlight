@@ -6,6 +6,12 @@ RGB::RGB() {
 	b = 0;
 }
 
+RGB::RGB(unsigned char r, unsigned char g, unsigned char b) {
+	this->r = r;
+	this->g = g;
+	this->b = b;
+}
+
 RGB& RGB::operator+=(RGB &rhs) {
 	this->r += rhs.r;
 	this->g += rhs.g;
