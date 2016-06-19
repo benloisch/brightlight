@@ -20,8 +20,8 @@ RGB& RGB::operator+=(RGB &rhs) {
 }
 
 RGB& RGB::operator/=(double rhs) {
-	this->r /= rhs;
-	this->g /= rhs;
-	this->b /= rhs;
+	this->r = unsigned char((this->r) / rhs);
+	this->g = unsigned char((this->g) / rhs);
+	this->b = unsigned char((this->b) / rhs);
 	return *this;
 }

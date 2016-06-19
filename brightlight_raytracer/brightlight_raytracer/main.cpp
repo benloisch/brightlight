@@ -13,13 +13,22 @@ Ray Tracer #3
 
 */
 
+
+
 int main() {
 
-	RayTracer raytracer;
-	raytracer.createGeometricObjects();
-	raytracer.render();
-	raytracer.saveImage();
-	
+	try {
+		RayTracer raytracer;
+		raytracer.createImage();
+		//raytracer.setupCamera();
+		//raytracer.createGeometricObjects();
+		//raytracer.render();
+		raytracer.saveImage();
+	}
+	catch (const exception e) {
+		cout << e.what() << endl;
+	}
+
 	system("PAUSE");
 
 	return 0;

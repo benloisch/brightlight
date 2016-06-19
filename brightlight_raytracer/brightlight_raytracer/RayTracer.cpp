@@ -1,9 +1,23 @@
 #include "RayTracer.h"
 #include "Utilities.h"
+#include "Sphere.h"
 #include <float.h>
 #include <iostream>
 #include <ctime>
 using namespace std;
+
+RayTracer::RayTracer() {
+
+}
+
+void RayTracer::createImage() {
+	bmp.createBMP(512, 512, "output");
+	bmp.setInitialBMPColor(0, 0, 0);
+}
+
+void RayTracer::setupCamera() {
+
+}
 
 void RayTracer::createGeometricObjects() {
 	objects.push_back(new Sphere(3, 0, 1, 6));
@@ -53,7 +67,7 @@ void RayTracer::render() {
 			//	rgb = object->getColor();
 			//}
 
-			bmp.setPixel(x, y, 0, 0, 0);
+			bmp.setPixelColor(x, y, 0, 0, 0);
 		}
 	}
 
@@ -63,14 +77,8 @@ void RayTracer::render() {
 	cout << "Rendered image in: " << elapsed_secs * 1000 << " miliseconds." << endl;
 }
 
-int RayTracer::saveImage() {
-	if (!bmp.saveBMP()) {
-		cout << "Failed to save bmp file" << endl;
-		return -1;
-	}
-	else {
-		return 0;
-	}
+void RayTracer::saveImage() {
+	bmp.saveBMP();
 }
 
 RayTracer::~RayTracer() {
