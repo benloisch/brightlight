@@ -1,9 +1,14 @@
-﻿Build started 6/19/2016 2:27:20 AM.
+﻿Build started 6/19/2016 11:01:10 PM.
      1>Project "C:\Github\Repository\brightlight\brightlight_raytracer\brightlight_raytracer\brightlight_raytracer.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _LIB /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt ImageBMP.cpp RayTracer.cpp
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _LIB /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt Camera.cpp RayTracer.cpp RaytracingObject.cpp Sphere.cpp main.cpp
+         main.cpp
          RayTracer.cpp
-         ImageBMP.cpp
+         Camera.cpp
+         Generating Code...
+         Compiling...
+         Sphere.cpp
+         RaytracingObject.cpp
          Generating Code...
        Link:
          C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Github\Repository\brightlight\brightlight_raytracer\Debug\brightlight_raytracer.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Github\Repository\brightlight\brightlight_raytracer\Debug\brightlight_raytracer.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Github\Repository\brightlight\brightlight_raytracer\Debug\brightlight_raytracer.lib" /MACHINE:X86 Debug\Camera.obj
@@ -22,4 +27,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:04.66
+Time Elapsed 00:00:07.92

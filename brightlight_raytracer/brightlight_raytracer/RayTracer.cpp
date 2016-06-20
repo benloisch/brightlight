@@ -16,7 +16,9 @@ void RayTracer::createImage() {
 }
 
 void RayTracer::setupCamera() {
-
+	cam.setCameraOrigin(0, 1, 0);
+	cam.setCameraPointOfInterest(0, 1, 1);
+	cam.calculateCameraMatrix();
 }
 
 void RayTracer::createGeometricObjects() {

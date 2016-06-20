@@ -10,8 +10,11 @@ public:
 
 	Matrix cameraMatrix;
 	Vector cameraOrigin;
+	Vector cameraPOI; //camera point of interest
 
 	Camera();
-	Camera(double x, double y, double z, double xLook, double yLook, double zLook);
+	void setCameraOrigin(double x, double y, double z);
+	void setCameraPointOfInterest(double x, double y, double z);
+	void calculateCameraMatrix();
 
 };

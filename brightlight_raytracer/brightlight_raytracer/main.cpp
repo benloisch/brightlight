@@ -20,7 +20,7 @@ int main() {
 	try {
 		RayTracer raytracer;
 		raytracer.createImage();
-		//raytracer.setupCamera();
+		raytracer.setupCamera();
 		//raytracer.createGeometricObjects();
 		//raytracer.render();
 		raytracer.saveImage();
