@@ -1,6 +1,8 @@
 #include "RayTracer.h"
 #include "Utilities.h"
 #include "Sphere.h"
+#include "Point_2D.h"
+#include "Sample.h"
 #include <float.h>
 #include <iostream>
 #include <ctime>
@@ -16,14 +18,23 @@ void RayTracer::createImage() {
 }
 
 void RayTracer::setupCamera() {
+	cam.setAspectRatio(bmp.width, bmp.height);
+	cam.setFieldOfView(90);
 	cam.setCameraOrigin(0, 1, 0);
 	cam.setCameraPointOfInterest(0, 1, 1);
 	cam.calculateCameraMatrix();
 }
 
 void RayTracer::createGeometricObjects() {
-	objects.push_back(new Sphere(3, 0, 1, 6));
-	objects[objects.size() - 1]->setColor(255, 0, 0);
+	objects.push_back(new Sphere);
+	((Sphere*)objects[objects.size() - 1])->setOrigin(0, 1, 6);
+	((Sphere*)objects[objects.size() - 1])->setColor(200, 100, 0);
+	((Sphere*)objects[objects.size() - 1])->setRadius(3);
+
+	objects.push_back(new Sphere);
+	((Sphere*)objects[objects.size() - 1])->setOrigin(1, 1, 6);
+	((Sphere*)objects[objects.size() - 1])->setColor(0, 100, 220);
+	((Sphere*)objects[objects.size() - 1])->setRadius(3);
 
 }
 
@@ -33,43 +44,48 @@ void RayTracer::render() {
 	//create clock variable to record miliseconds of rendering time
 	clock_t begin = clock();
 
-	double aspectRatio = double(bmp.width) / double(bmp.height);
-	double fov = 90;
-	//convert fov from degrees to radians
-	fov = (3.14159265359 * fov) / 180.0;
-
-	for (unsigned int y = 0; y < bmp.height + 1; y++) {
+	for (unsigned int y = 0; y < bmp.height; y++) {
+		cout << y << endl;
 		for (unsigned int x = 0; x < bmp.width; x++) {
-			//convert from raster space to normalized device coordinate space
-			//double xPixelNDC = (x + 0.5) / bmp.width;
-			//double yPixelNDC = (y + 0.5) / bmp.height;
 
-			//convert from NDC space to screen space
-			//double xPixelScreen = ((2 * xPixelNDC) - 1) * aspectRatio * tan(fov / 2);
-			//double yPixelScreen = 1 - (2 * yPixelNDC);
+			vector<Point_2D> samples = Sample::jittered(16);
+			RGB rgb;
+			for (unsigned int i = 0; i < samples.size(); i++) {
 
-			//Vector primaryRay(xPixelScreen, yPixelScreen, 1, 0);
-			//primaryRay.normalize();
+				double samplex = samples[i].x + x;
+				double sampley = samples[i].y + y;
+				//convert from raster space to normalized device coordinate space
 
-			//find closest object
-			//RaytracingObject *object = NULL;
-			//double minDepth = DBL_MAX;
-			//double depth = DBL_MAX;
-			
-			//for (unsigned int i = 0; i < objects.size(); i++) {
-			//	objects[i]->intersectRay(depth, primaryRay, cam);
-			//	if (depth < minDepth) {
-			//		object = objects[i];
-			//	}
-			//}
+				double xPixelNDC = samplex / bmp.width;
+				double yPixelNDC = sampley / bmp.height;
 
-			//RGB rgb = bmp.getPixel(x, y);
+				//convert from NDC space to screen space
+				double xPixelScreen = ((2 * xPixelNDC) - 1) * cam.aspectRatio * tan(cam.fieldOfView / 2);
+				double yPixelScreen = 1 - (2 * yPixelNDC);
 
-			//if (object != NULL) {
-			//	rgb = object->getColor();
-			//}
+				Vector primaryRay(xPixelScreen, yPixelScreen, 1, 0);
+				primaryRay.normalize();
 
-			bmp.setPixelColor(x, y, 0, 0, 0);
+				//find closest object
+				RaytracingObject *object = NULL;
+				double minDepth = DBL_MAX;
+				double depth = DBL_MAX;
+
+				for (unsigned int i = 0; i < objects.size(); i++) {
+					objects[i]->intersectRay(depth, primaryRay, cam);
+					if (depth < minDepth) {
+						object = objects[i];
+						minDepth = depth;
+					}
+				}
+
+				if (object != NULL) {
+					rgb += object->getColor();
+				}
+			}
+
+			rgb /= 16;
+			bmp.setPixelColor(x, y, rgb.r, rgb.g, rgb.b);
 		}
 	}
 

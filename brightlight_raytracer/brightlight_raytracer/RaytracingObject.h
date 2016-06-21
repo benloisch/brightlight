@@ -10,8 +10,8 @@ class RaytracingObject {
 
 public:
 
-	virtual void intersectRay(double &depth, Vector rayIn, Camera cam);
-	virtual void setColor(unsigned char r, unsigned char g, unsigned char b);
-	virtual RGB getColor();
+	inline virtual void intersectRay(double &depth, Vector rayIn, Camera cam) = 0;
+	inline virtual void setColor(unsigned char r, unsigned char g, unsigned char b) = 0;
+	inline virtual RGB getColor() = 0;
 
 };

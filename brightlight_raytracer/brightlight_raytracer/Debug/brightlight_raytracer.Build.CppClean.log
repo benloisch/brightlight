@@ -1,22 +1,32 @@
-c:\github\repository\brightlight\brightlight_raytracer\brightlight_raytracer\debug\vc120.pdb
-c:\github\repository\brightlight\brightlight_raytracer\brightlight_raytracer\debug\vc120.idb
-c:\github\repository\brightlight\brightlight_raytracer\brightlight_raytracer\debug\camera.obj
-c:\github\repository\brightlight\brightlight_raytracer\brightlight_raytracer\debug\imagebmp.obj
-c:\github\repository\brightlight\brightlight_raytracer\brightlight_raytracer\debug\main.obj
-c:\github\repository\brightlight\brightlight_raytracer\brightlight_raytracer\debug\matrix.obj
-c:\github\repository\brightlight\brightlight_raytracer\brightlight_raytracer\debug\plane.obj
-c:\github\repository\brightlight\brightlight_raytracer\brightlight_raytracer\debug\ray.obj
-c:\github\repository\brightlight\brightlight_raytracer\brightlight_raytracer\debug\raytracer.obj
-c:\github\repository\brightlight\brightlight_raytracer\brightlight_raytracer\debug\raytracingobject.obj
-c:\github\repository\brightlight\brightlight_raytracer\brightlight_raytracer\debug\rgb.obj
-c:\github\repository\brightlight\brightlight_raytracer\brightlight_raytracer\debug\sphere.obj
-c:\github\repository\brightlight\brightlight_raytracer\brightlight_raytracer\debug\vector.obj
-c:\github\repository\brightlight\brightlight_raytracer\debug\brightlight_raytracer.ilk
-c:\github\repository\brightlight\brightlight_raytracer\debug\brightlight_raytracer.exe
-c:\github\repository\brightlight\brightlight_raytracer\debug\brightlight_raytracer.pdb
-c:\github\repository\brightlight\brightlight_raytracer\brightlight_raytracer\debug\brightli.b173db56.tlog\cl.command.1.tlog
-c:\github\repository\brightlight\brightlight_raytracer\brightlight_raytracer\debug\brightli.b173db56.tlog\cl.read.1.tlog
-c:\github\repository\brightlight\brightlight_raytracer\brightlight_raytracer\debug\brightli.b173db56.tlog\cl.write.1.tlog
-c:\github\repository\brightlight\brightlight_raytracer\brightlight_raytracer\debug\brightli.b173db56.tlog\link.command.1.tlog
-c:\github\repository\brightlight\brightlight_raytracer\brightlight_raytracer\debug\brightli.b173db56.tlog\link.read.1.tlog
-c:\github\repository\brightlight\brightlight_raytracer\brightlight_raytracer\debug\brightli.b173db56.tlog\link.write.1.tlog
+c:\users\ben loisch\documents\github\repository\brightlight\brightlight_raytracer\brightlight_raytracer\debug\vc120.pdb
+c:\users\ben loisch\documents\github\repository\brightlight\brightlight_raytracer\brightlight_raytracer\debug\vc120.idb
+c:\users\ben loisch\documents\github\repository\brightlight\brightlight_raytracer\brightlight_raytracer\debug\camera.obj
+c:\users\ben loisch\documents\github\repository\brightlight\brightlight_raytracer\brightlight_raytracer\debug\imagebmp.obj
+c:\users\ben loisch\documents\github\repository\brightlight\brightlight_raytracer\brightlight_raytracer\debug\main.obj
+c:\users\ben loisch\documents\github\repository\brightlight\brightlight_raytracer\brightlight_raytracer\debug\matrix.obj
+c:\users\ben loisch\documents\github\repository\brightlight\brightlight_raytracer\brightlight_raytracer\debug\plane.obj
+c:\users\ben loisch\documents\github\repository\brightlight\brightlight_raytracer\brightlight_raytracer\debug\point_2d.obj
+c:\users\ben loisch\documents\github\repository\brightlight\brightlight_raytracer\brightlight_raytracer\debug\ray.obj
+c:\users\ben loisch\documents\github\repository\brightlight\brightlight_raytracer\brightlight_raytracer\debug\raytracer.obj
+c:\users\ben loisch\documents\github\repository\brightlight\brightlight_raytracer\brightlight_raytracer\debug\raytracingobject.obj
+c:\users\ben loisch\documents\github\repository\brightlight\brightlight_raytracer\brightlight_raytracer\debug\rgb.obj
+c:\users\ben loisch\documents\github\repository\brightlight\brightlight_raytracer\brightlight_raytracer\debug\sample.obj
+c:\users\ben loisch\documents\github\repository\brightlight\brightlight_raytracer\brightlight_raytracer\debug\sphere.obj
+c:\users\ben loisch\documents\github\repository\brightlight\brightlight_raytracer\brightlight_raytracer\debug\vector.obj
+c:\users\ben loisch\documents\github\repository\brightlight\brightlight_raytracer\debug\brightlight_raytracer.pdb
+c:\users\ben loisch\documents\github\repository\brightlight\brightlight_raytracer\brightlight_raytracer\debug\brightli.b173db56.tlog\cl.command.1.tlog
+c:\users\ben loisch\documents\github\repository\brightlight\brightlight_raytracer\brightlight_raytracer\debug\brightli.b173db56.tlog\cl.read.1.tlog
+c:\users\ben loisch\documents\github\repository\brightlight\brightlight_raytracer\brightlight_raytracer\debug\brightli.b173db56.tlog\cl.write.1.tlog
+c:\users\ben loisch\documents\github\repository\brightlight\brightlight_raytracer\brightlight_raytracer\debug\brightli.b173db56.tlog\link-cvtres.read.1.tlog
+c:\users\ben loisch\documents\github\repository\brightlight\brightlight_raytracer\brightlight_raytracer\debug\brightli.b173db56.tlog\link-cvtres.write.1.tlog
+c:\users\ben loisch\documents\github\repository\brightlight\brightlight_raytracer\brightlight_raytracer\debug\brightli.b173db56.tlog\link-rc.read.1.tlog
+c:\users\ben loisch\documents\github\repository\brightlight\brightlight_raytracer\brightlight_raytracer\debug\brightli.b173db56.tlog\link-rc.write.1.tlog
+c:\users\ben loisch\documents\github\repository\brightlight\brightlight_raytracer\brightlight_raytracer\debug\brightli.b173db56.tlog\link.5112-cvtres.read.1.tlog
+c:\users\ben loisch\documents\github\repository\brightlight\brightlight_raytracer\brightlight_raytracer\debug\brightli.b173db56.tlog\link.5112-cvtres.write.1.tlog
+c:\users\ben loisch\documents\github\repository\brightlight\brightlight_raytracer\brightlight_raytracer\debug\brightli.b173db56.tlog\link.5112-rc.read.1.tlog
+c:\users\ben loisch\documents\github\repository\brightlight\brightlight_raytracer\brightlight_raytracer\debug\brightli.b173db56.tlog\link.5112-rc.write.1.tlog
+c:\users\ben loisch\documents\github\repository\brightlight\brightlight_raytracer\brightlight_raytracer\debug\brightli.b173db56.tlog\link.5112.read.1.tlog
+c:\users\ben loisch\documents\github\repository\brightlight\brightlight_raytracer\brightlight_raytracer\debug\brightli.b173db56.tlog\link.5112.write.1.tlog
+c:\users\ben loisch\documents\github\repository\brightlight\brightlight_raytracer\brightlight_raytracer\debug\brightli.b173db56.tlog\link.command.1.tlog
+c:\users\ben loisch\documents\github\repository\brightlight\brightlight_raytracer\brightlight_raytracer\debug\brightli.b173db56.tlog\link.read.1.tlog
+c:\users\ben loisch\documents\github\repository\brightlight\brightlight_raytracer\brightlight_raytracer\debug\brightli.b173db56.tlog\link.write.1.tlog

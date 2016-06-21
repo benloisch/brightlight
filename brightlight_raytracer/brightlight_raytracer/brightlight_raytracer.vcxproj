@@ -76,6 +76,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Point_2D.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="ImageBMP.h" />
     <ClInclude Include="matrix.h" />
@@ -84,6 +85,7 @@
     <ClInclude Include="RayTracer.h" />
     <ClInclude Include="RaytracingObject.h" />
     <ClInclude Include="RGB.h" />
+    <ClInclude Include="Sample.h" />
     <ClInclude Include="Sphere.h" />
     <ClInclude Include="Utilities.h" />
     <ClInclude Include="Vector.h" />
@@ -94,10 +96,12 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="matrix.cpp" />
     <ClCompile Include="Plane.cpp" />
+    <ClCompile Include="Point_2D.cpp" />
     <ClCompile Include="Ray.cpp" />
     <ClCompile Include="RayTracer.cpp" />
     <ClCompile Include="RaytracingObject.cpp" />
     <ClCompile Include="RGB.cpp" />
+    <ClCompile Include="Sample.cpp" />
     <ClCompile Include="Sphere.cpp" />
     <ClCompile Include="Vector.cpp" />
   </ItemGroup>

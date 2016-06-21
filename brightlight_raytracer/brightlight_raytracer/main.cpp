@@ -21,8 +21,8 @@ int main() {
 		RayTracer raytracer;
 		raytracer.createImage();
 		raytracer.setupCamera();
-		//raytracer.createGeometricObjects();
-		//raytracer.render();
+		raytracer.createGeometricObjects();
+		raytracer.render();
 		raytracer.saveImage();
 	}
 	catch (const exception e) {

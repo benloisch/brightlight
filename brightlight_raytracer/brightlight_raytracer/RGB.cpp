@@ -6,22 +6,8 @@ RGB::RGB() {
 	b = 0;
 }
 
-RGB::RGB(unsigned char r, unsigned char g, unsigned char b) {
+RGB::RGB(double r, double g, double b) {
 	this->r = r;
 	this->g = g;
 	this->b = b;
-}
-
-RGB& RGB::operator+=(RGB &rhs) {
-	this->r += rhs.r;
-	this->g += rhs.g;
-	this->b += rhs.b;
-	return *this;
-}
-
-RGB& RGB::operator/=(double rhs) {
-	this->r = unsigned char((this->r) / rhs);
-	this->g = unsigned char((this->g) / rhs);
-	this->b = unsigned char((this->b) / rhs);
-	return *this;
 }

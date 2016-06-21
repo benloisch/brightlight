@@ -174,31 +174,9 @@ void ImageBMP::saveBMP() {
 	
 }
 
-void ImageBMP::setPixelColor(unsigned int x, unsigned int y, unsigned char r, unsigned char g, unsigned char b) {
-	red[x][y] = r;
-	green[x][y] = g;
-	blue[x][y] = b;
-}
-
 void ImageBMP::setInitialBMPColor(unsigned char r, unsigned char g, unsigned char b) {
 	for (unsigned int i = 0; i < height; i++) {
 		for (unsigned int j = 0; j < width; j++)
 			this->setPixelColor(j, i, r, g, b);
 	}
-}
-
-RGB ImageBMP::getPixelColor(unsigned int x, unsigned int y) {
-	RGB rgb;
-
-	try {
-		rgb.r = red[x][y];
-		rgb.g = green[x][y];
-		rgb.b = blue[x][y];
-	}
-	catch (...) {
-		throw exception("Error in ImageBMP.getPixelColor()");
-		cleanup();
-	}
-
-	return rgb;
 }
