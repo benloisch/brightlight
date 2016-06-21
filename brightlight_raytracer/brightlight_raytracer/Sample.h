@@ -11,28 +11,31 @@ using namespace std;
 class Sample {
 public:
 
+	Point_2D *samples;
+	unsigned int numberOfSamples;
+
+	Sample();
+	~Sample();
+
+	void setNumberOfSamples(unsigned int size);
+
 	inline 
-	static vector<Point_2D> multiJittered() {
+	Point_2D* jittered() {
 
-		
-
-	}
-
-	inline 
-	static vector<Point_2D> jittered(int samples) {
-
-		vector<Point_2D> points;
-		double n = sqrt(samples);
-		for (double x = 0; x < n; x++) {
-			for (double y = 0; y < n; y++) {
+		int i = 0;
+		double n = sqrt(numberOfSamples);
+		for (double y = 0; y < n; y++) {
+			for (double x = 0; x < n; x++) {
 				srand(unsigned int(time(0)));
 				double xVal = (x / n) + (((double)rand() / (RAND_MAX)) / n);
 				double yVal = (y / n) + (((double)rand() / (RAND_MAX)) / n);
-				points.push_back(Point_2D(xVal, yVal));
+				samples[i].x = xVal;
+				samples[i].y = yVal;
+				i++;
 			}
 		}
 
-		return points;
+		return samples;
 	}
 
 };

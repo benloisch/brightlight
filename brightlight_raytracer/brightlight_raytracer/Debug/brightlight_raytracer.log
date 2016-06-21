@@ -1,3 +1,16 @@
-﻿  RayTracer.cpp
-c:\users\ben loisch\documents\github\repository\brightlight\brightlight_raytracer\brightlight_raytracer\raytracer.cpp(88): warning C4244: 'argument' : conversion from 'double' to 'unsigned char', possible loss of data
+﻿  Vector.cpp
+  Sphere.cpp
+  Sample.cpp
+  RGB.cpp
+  RaytracingObject.cpp
+  RayTracer.cpp
+c:\users\ben loisch\documents\github\repository\brightlight\brightlight_raytracer\brightlight_raytracer\raytracer.cpp(95): warning C4244: 'argument' : conversion from 'double' to 'unsigned char', possible loss of data
+  Ray.cpp
+  Point_2D.cpp
+  Plane.cpp
+  matrix.cpp
+  main.cpp
+  ImageBMP.cpp
+  Camera.cpp
+  Generating Code...
   brightlight_raytracer.vcxproj -> C:\Users\Ben Loisch\Documents\GitHub\Repository\brightlight\brightlight_raytracer\Debug\brightlight_raytracer.exe

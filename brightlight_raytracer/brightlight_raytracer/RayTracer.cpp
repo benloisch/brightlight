@@ -25,6 +25,10 @@ void RayTracer::setupCamera() {
 	cam.calculateCameraMatrix();
 }
 
+void RayTracer::setSamples() {
+	sample.setNumberOfSamples(1);
+}
+
 void RayTracer::createGeometricObjects() {
 	objects.push_back(new Sphere);
 	((Sphere*)objects[objects.size() - 1])->setOrigin(0, 1, 6);
@@ -48,12 +52,15 @@ void RayTracer::render() {
 		cout << y << endl;
 		for (unsigned int x = 0; x < bmp.width; x++) {
 
-			vector<Point_2D> samples = Sample::jittered(16);
 			RGB rgb;
-			for (unsigned int i = 0; i < samples.size(); i++) {
+			sample.jittered();
 
-				double samplex = samples[i].x + x;
-				double sampley = samples[i].y + y;
+			//sample the image
+			for (unsigned int i = 0; i < sample.numberOfSamples; i++) {
+
+				double samplex = sample.samples[i].x + x;
+				double sampley = sample.samples[i].y + y;
+
 				//convert from raster space to normalized device coordinate space
 
 				double xPixelNDC = samplex / bmp.width;
@@ -61,7 +68,7 @@ void RayTracer::render() {
 
 				//convert from NDC space to screen space
 				double xPixelScreen = ((2 * xPixelNDC) - 1) * cam.aspectRatio * tan(cam.fieldOfView / 2);
-				double yPixelScreen = 1 - (2 * yPixelNDC);
+				double yPixelScreen = 1 - (2 * yPixelNDC) * tan(cam.fieldOfView / 2);
 
 				Vector primaryRay(xPixelScreen, yPixelScreen, 1, 0);
 				primaryRay.normalize();
@@ -84,7 +91,7 @@ void RayTracer::render() {
 				}
 			}
 
-			rgb /= 16;
+			rgb /= sample.numberOfSamples;
 			bmp.setPixelColor(x, y, rgb.r, rgb.g, rgb.b);
 		}
 	}

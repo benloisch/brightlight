@@ -21,6 +21,7 @@ int main() {
 		RayTracer raytracer;
 		raytracer.createImage();
 		raytracer.setupCamera();
+		raytracer.setSamples();
 		raytracer.createGeometricObjects();
 		raytracer.render();
 		raytracer.saveImage();
