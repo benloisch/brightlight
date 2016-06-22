@@ -3,8 +3,6 @@
 #include <string>
 
 #include "Vector.h"
-#include "matrix.h"
-using namespace blmatrix;
 using namespace blvector;
 using namespace std;
 
@@ -13,6 +11,8 @@ using namespace std;
 //Floating-point division requires more cycles than multiplication.
 //Thus, if dividing by PI, instead, multiply by the inverse of PI.
 const double inversePI = 0.3183098861837906;
+//const double PI = 3.14159265359;
+//const double e = 2.718281828459;
 
 void printVector(Vector v) {
 	cout << "V: " << to_string(v.x) << ", " << to_string(v.y) << ", " << to_string(v.z) << ", " << to_string(v.w) << endl;

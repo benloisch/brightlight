@@ -2,7 +2,6 @@
 #include "Utilities.h"
 #include "Sphere.h"
 #include "Point_2D.h"
-#include "Sample.h"
 #include "Plane.h"
 #include <float.h>
 #include <iostream>
@@ -27,7 +26,9 @@ void RayTracer::setupCamera() {
 }
 
 void RayTracer::setSamples() {
-	sample.setNumberOfSamples(4);
+	sample.setNumberOfSamples(16);
+	sample.initializeHemisphereSamples();
+	sample.setE(2.718281828459);
 }
 
 void RayTracer::createGeometricObjects() {
@@ -61,7 +62,8 @@ void RayTracer::render() {
 
 			RGB rgb;
 			sample.jittered();
-			//sample.mapSamplesToDisk();
+			sample.mapSamplesToDisk();
+			//sample.mapDiskToHemisphere();
 
 			//for (int j = 0; j < sample.numberOfSamples; j++) {
 			//	cout << "x: " << sample.samples[j].x << endl;
@@ -70,23 +72,13 @@ void RayTracer::render() {
 
 			//sample the image
 			for (unsigned int i = 0; i < sample.numberOfSamples; i++) {
+				//bmp.setPixelColor(sample.samples[i].x * bmp.width, sample.samples[i].y * bmp.width, 20, 200, 20);
+				//bmp.setPixelColor(sample.diskSamples[i].x * bmp.width, sample.diskSamples[i].y * bmp.width, 20, 200, 20);
+				//bmp.setPixelColor(sample.hemisphereSamples[i].x * bmp.width, sample.hemisphereSamples[i].y * bmp.width, 20, sample.hemisphereSamples[i].z * 255, 20);
 
-				//bmp.setPixelColor(sample.samples[i].x * bmp.width, sample.samples[i].y * bmp.width, 255, 255, 255);
-
-				double samplex = sample.samples[i].x + x;
-				double sampley = sample.samples[i].y + y;
-
-				//convert from raster space to normalized device coordinate space
-
-				double xPixelNDC = samplex / bmp.width;
-				double yPixelNDC = sampley / bmp.height;
-
-				//convert from NDC space to screen space
-				double xPixelScreen = ((2 * xPixelNDC) - 1) * cam.aspectRatio * tan(cam.fieldOfView / 2);
-				double yPixelScreen = 1 - (2 * yPixelNDC) * tan(cam.fieldOfView / 2);
-
-				Vector primaryRay(xPixelScreen, yPixelScreen, 1, 0);
-				primaryRay.normalize();
+				Vector rayOrigin;
+				//Vector primaryRay = cam.pinholeCamera(x, y, sample.samples[i].x, sample.samples[i].y, cam, bmp, rayOrigin);
+				Vector primaryRay = cam.thinlensCamera(x, y, sample.samples[i].x, sample.samples[i].y, sample.diskSamples[i].x, sample.diskSamples[i].y, cam, bmp, rayOrigin);
 
 				//find closest object
 				RaytracingObject *object = NULL;
@@ -94,7 +86,7 @@ void RayTracer::render() {
 				double depth = DBL_MAX;
 
 				for (unsigned int i = 0; i < objects.size(); i++) {
-					objects[i]->intersectRay(depth, primaryRay, cam);
+					objects[i]->intersectRay(depth, primaryRay, rayOrigin);
 					if (depth < minDepth) {
 						object = objects[i];
 						minDepth = depth;
@@ -104,7 +96,6 @@ void RayTracer::render() {
 				if (object != NULL) {
 					rgb += object->getColor();
 				}
-
 			}
 
 			rgb /= sample.numberOfSamples;

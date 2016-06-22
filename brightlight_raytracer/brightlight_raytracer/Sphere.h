@@ -24,12 +24,12 @@ public:
 		return rgb;
 	};
 	inline
-	void Sphere::intersectRay(double &depth, Vector rayIn, Camera cam) {
+		void Sphere::intersectRay(double &depth, Vector rayIn, Vector rayOrigin) {
 		Vector sphereOrigin(xOrigin, yOrigin, zOrigin, 0);
 
 		double a = rayIn * rayIn;
-		double b = ((cam.cameraOrigin - sphereOrigin) * rayIn) * 2;
-		double c = ((cam.cameraOrigin - sphereOrigin) * (cam.cameraOrigin - sphereOrigin)) - (radius * radius);
+		double b = ((rayOrigin - sphereOrigin) * rayIn) * 2;
+		double c = ((rayOrigin - sphereOrigin) * (rayOrigin - sphereOrigin)) - (radius * radius);
 
 		double discriminant = (b * b) - (4 * a * c);
 		if (discriminant < 0) {

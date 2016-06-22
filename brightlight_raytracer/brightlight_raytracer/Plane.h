@@ -2,6 +2,8 @@
 
 #include "RaytracingObject.h"
 #include <float.h>
+#include "Vector.h"
+using namespace blvector;
 
 class Plane : public RaytracingObject{
 
@@ -26,9 +28,9 @@ public:
 		return rgb;
 	}
 
-	inline virtual void intersectRay(double &depth, Vector rayIn, Camera cam) {
+	inline virtual void intersectRay(double &depth, Vector rayIn, Vector rayOrigin) {
 
-		depth = ((pointOnPlane - cam.cameraOrigin) * planeNormal) / (rayIn * planeNormal);
+		depth = ((pointOnPlane - rayOrigin) * planeNormal) / (rayIn * planeNormal);
 
 		if (depth <= 0) {
 			depth = DBL_MAX;
@@ -39,7 +41,7 @@ public:
 	
 		//if checkered is true, adjust rgb to be black or white depending on divisibility by one or zero
 		if (checkered) {
-			double magnitude = (((rayIn * depth) + cam.cameraOrigin) - pointOnPlane).getMagnitude();
+			double magnitude = (((rayIn * depth) + rayOrigin) - pointOnPlane).getMagnitude();
 			if (int(magnitude) % 2 == 0) {
 				rgb.r = 0;
 				rgb.g = 0;
