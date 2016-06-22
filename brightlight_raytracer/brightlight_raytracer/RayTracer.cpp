@@ -3,6 +3,7 @@
 #include "Sphere.h"
 #include "Point_2D.h"
 #include "Sample.h"
+#include "Plane.h"
 #include <float.h>
 #include <iostream>
 #include <ctime>
@@ -20,25 +21,31 @@ void RayTracer::createImage() {
 void RayTracer::setupCamera() {
 	cam.setAspectRatio(bmp.width, bmp.height);
 	cam.setFieldOfView(90);
-	cam.setCameraOrigin(0, 1, 0);
-	cam.setCameraPointOfInterest(0, 1, 1);
+	cam.setCameraOrigin(0, 5, 0);
+	cam.setCameraPointOfInterest(0, 3, 6);
 	cam.calculateCameraMatrix();
 }
 
 void RayTracer::setSamples() {
-	sample.setNumberOfSamples(1);
+	sample.setNumberOfSamples(4);
 }
 
 void RayTracer::createGeometricObjects() {
 	objects.push_back(new Sphere);
-	((Sphere*)objects[objects.size() - 1])->setOrigin(0, 1, 6);
+	((Sphere*)objects[objects.size() - 1])->setOrigin(0, 1, 12);
 	((Sphere*)objects[objects.size() - 1])->setColor(200, 100, 0);
 	((Sphere*)objects[objects.size() - 1])->setRadius(3);
 
 	objects.push_back(new Sphere);
-	((Sphere*)objects[objects.size() - 1])->setOrigin(1, 1, 6);
+	((Sphere*)objects[objects.size() - 1])->setOrigin(2, 1, 10);
 	((Sphere*)objects[objects.size() - 1])->setColor(0, 100, 220);
 	((Sphere*)objects[objects.size() - 1])->setRadius(3);
+
+	objects.push_back(new Plane);
+	((Plane*)objects[objects.size() - 1])->setPlaneNormal(0, 1, 0);
+	((Plane*)objects[objects.size() - 1])->setColor(200, 200, 220);
+	((Plane*)objects[objects.size() - 1])->setPointOnPlane(0, 0, 0);
+	((Plane*)objects[objects.size() - 1])->setCheckered(true);
 
 }
 
@@ -49,14 +56,22 @@ void RayTracer::render() {
 	clock_t begin = clock();
 
 	for (unsigned int y = 0; y < bmp.height; y++) {
-		cout << y << endl;
+		//cout << y << endl;
 		for (unsigned int x = 0; x < bmp.width; x++) {
 
 			RGB rgb;
 			sample.jittered();
+			//sample.mapSamplesToDisk();
+
+			//for (int j = 0; j < sample.numberOfSamples; j++) {
+			//	cout << "x: " << sample.samples[j].x << endl;
+			//	cout << "y: " << sample.samples[j].y << endl;
+			//}
 
 			//sample the image
 			for (unsigned int i = 0; i < sample.numberOfSamples; i++) {
+
+				//bmp.setPixelColor(sample.samples[i].x * bmp.width, sample.samples[i].y * bmp.width, 255, 255, 255);
 
 				double samplex = sample.samples[i].x + x;
 				double sampley = sample.samples[i].y + y;
@@ -89,6 +104,7 @@ void RayTracer::render() {
 				if (object != NULL) {
 					rgb += object->getColor();
 				}
+
 			}
 
 			rgb /= sample.numberOfSamples;
