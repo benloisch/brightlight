@@ -13,25 +13,35 @@ RayTracer::RayTracer() {
 }
 
 void RayTracer::createImage() {
+	cout << "Creating BMP..." << endl;
 	bmp.createBMP(512, 512, "output");
+	cout << "Size of BMP: " << bmp.width << " x " << bmp.height << endl;
 	bmp.setInitialBMPColor(0, 0, 0);
 }
 
 void RayTracer::setupCamera() {
+	cout << "Setting up camera..." << endl;
 	cam.setAspectRatio(bmp.width, bmp.height);
 	cam.setFieldOfView(90);
-	cam.setCameraOrigin(0, 5, 0);
-	cam.setCameraPointOfInterest(0, 3, 6);
+	cout << "Camera has " << cam.fieldOfView * (180 / PI) << " degree field of view." << endl;
+	cam.setCameraOrigin(0, 7, -5);
+	cam.setCameraPointOfInterest(0, 2, 6);
 	cam.calculateCameraMatrix();
+	cam.setThinLensFocalPlaneDistance(10);
+	cam.setThinLensRadius(1);
+	cam.setThinLensViewPlaneDistance(1);
 }
 
 void RayTracer::setSamples() {
+	cout << "Initializing samples..." << endl;
 	sample.setNumberOfSamples(16);
+	cout << "Rendering with " << sample.numberOfSamples << " samples per pixel." << endl;
 	sample.initializeHemisphereSamples();
 	sample.setE(2.718281828459);
 }
 
 void RayTracer::createGeometricObjects() {
+	cout << "Loading geometric objects..." << endl;
 	objects.push_back(new Sphere);
 	((Sphere*)objects[objects.size() - 1])->setOrigin(0, 1, 12);
 	((Sphere*)objects[objects.size() - 1])->setColor(200, 100, 0);
@@ -56,8 +66,14 @@ void RayTracer::render() {
 	//create clock variable to record miliseconds of rendering time
 	clock_t begin = clock();
 
+	cout << "Rendering image..." << endl;
+
 	for (unsigned int y = 0; y < bmp.height; y++) {
-		//cout << y << endl;
+		if (y == 1) { //display time estimate
+			clock_t end = clock();
+			double elapsed_secs = double(end - begin) / CLOCKS_PER_SEC;
+			std::cout << "Image will be rendered in approximately " << elapsed_secs * bmp.height << " seconds..." << endl;
+		}
 		for (unsigned int x = 0; x < bmp.width; x++) {
 
 			RGB rgb;
@@ -77,8 +93,8 @@ void RayTracer::render() {
 				//bmp.setPixelColor(sample.hemisphereSamples[i].x * bmp.width, sample.hemisphereSamples[i].y * bmp.width, 20, sample.hemisphereSamples[i].z * 255, 20);
 
 				Vector rayOrigin;
-				//Vector primaryRay = cam.pinholeCamera(x, y, sample.samples[i].x, sample.samples[i].y, cam, bmp, rayOrigin);
-				Vector primaryRay = cam.thinlensCamera(x, y, sample.samples[i].x, sample.samples[i].y, sample.diskSamples[i].x, sample.diskSamples[i].y, cam, bmp, rayOrigin);
+				Vector primaryRay = cam.pinholeCamera(x, y, sample.samples[i].x, sample.samples[i].y, cam, bmp, rayOrigin);
+				//Vector primaryRay = cam.thinlensCamera(x, y, sample.samples[i].x, sample.samples[i].y, sample.diskSamples[i].x, sample.diskSamples[i].y, cam, bmp, rayOrigin);
 
 				//find closest object
 				RaytracingObject *object = NULL;
@@ -106,7 +122,7 @@ void RayTracer::render() {
 	clock_t end = clock();
 	double elapsed_secs = double(end - begin) / CLOCKS_PER_SEC;
 
-	cout << "Rendered image in: " << elapsed_secs * 1000 << " miliseconds." << endl;
+	std::cout << "Rendered image in: " << elapsed_secs << " seconds." << endl;
 }
 
 void RayTracer::saveImage() {

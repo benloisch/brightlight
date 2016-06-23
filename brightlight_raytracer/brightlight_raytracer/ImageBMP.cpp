@@ -97,7 +97,7 @@ void ImageBMP::createBMP(unsigned int width, unsigned int height, string fileNam
 void ImageBMP::saveBMP() {
 	ofstream file;
 
-	cout << "writing BMP file..." << endl;
+	cout << "Writing BMP file..." << endl;
 
 	WORD bfType = 'BM';
 

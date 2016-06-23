@@ -5,6 +5,21 @@ using namespace blvector;
 Camera::Camera() {
 	aspectRatio = 0;
 	fieldOfView = 0;
+	thinlensRadius = 1;
+	thinlensViewPlaneDistance = 1;
+	thinlensFocalPlaneDistance = 1;
+}
+
+void Camera::setThinLensFocalPlaneDistance(double d) {
+	thinlensFocalPlaneDistance = d;
+}
+
+void Camera::setThinLensViewPlaneDistance(double d) {
+	thinlensViewPlaneDistance = d;
+}
+
+void Camera::setThinLensRadius(double r) {
+	thinlensRadius = r;
 }
 
 void Camera::setAspectRatio(const unsigned int w, const unsigned int h) {

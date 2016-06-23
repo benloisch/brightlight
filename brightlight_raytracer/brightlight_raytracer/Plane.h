@@ -2,6 +2,7 @@
 
 #include "RaytracingObject.h"
 #include <float.h>
+#include <math.h>
 #include "Vector.h"
 using namespace blvector;
 
@@ -39,10 +40,18 @@ public:
 
 		//depth gets returned through parameter
 	
-		//if checkered is true, adjust rgb to be black or white depending on divisibility by one or zero
+		//if checkered is true, adjust rgb to be black or white depending on divisibility by 2
 		if (checkered) {
-			double magnitude = (((rayIn * depth) + rayOrigin) - pointOnPlane).getMagnitude();
-			if (int(magnitude) % 2 == 0) {
+			
+			Vector p = ((rayIn * depth) + rayOrigin);
+			
+			if (p.x < 0)
+				p.x -= 1;
+
+			if (p.y < 0)
+				p.y -= 1;
+
+			if (((abs(int(p.x)) % 2 == 0) && (abs(int(p.z)) % 2 == 0)) || ((abs(int(p.x)) % 2 == 1) && (abs(int(p.z)) % 2 == 1))) {
 				rgb.r = 0;
 				rgb.g = 0;
 				rgb.b = 0;

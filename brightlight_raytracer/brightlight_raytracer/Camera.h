@@ -16,8 +16,14 @@ public:
 
 	double aspectRatio;
 	double fieldOfView;
+	double thinlensRadius;
+	double thinlensViewPlaneDistance;
+	double thinlensFocalPlaneDistance;
 
 	Camera();
+	void setThinLensViewPlaneDistance(double d);
+	void setThinLensFocalPlaneDistance(double d);
+	void setThinLensRadius(double r);
 	void setAspectRatio(const unsigned int w, const unsigned int h);
 	void setFieldOfView(double degrees);
 	void setCameraOrigin(double x, double y, double z);
@@ -60,11 +66,14 @@ public:
 		double xPixelScreen = ((2 * xPixelNDC) - 1) * cam.aspectRatio * tan(cam.fieldOfView / 2);
 		double yPixelScreen = 1 - (2 * yPixelNDC) * tan(cam.fieldOfView / 2);
 
-		double f = 10;
-		double d = 1;
+		double f = thinlensFocalPlaneDistance;
+		double d = thinlensViewPlaneDistance;
 
 		double px = xPixelScreen * (f / d);
 		double py = yPixelScreen * (f / d);
+
+		cx *= thinlensRadius;
+		cy *= thinlensRadius;
 
 		//Vector p(xPixelScreen * (f / d), yPixelScreen * (f / d), f, 0);
 		//Vector ls(cx, cy, d, 0);

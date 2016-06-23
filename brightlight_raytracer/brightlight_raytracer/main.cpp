@@ -17,6 +17,8 @@ Ray Tracer #3
 
 int main() {
 
+	cout << "Initializing ray tracer..." << endl;
+
 	try {
 		RayTracer raytracer;
 		raytracer.createImage();
