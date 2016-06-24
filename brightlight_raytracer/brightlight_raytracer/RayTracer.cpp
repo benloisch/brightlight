@@ -28,7 +28,7 @@ void RayTracer::setupCamera() {
 	cam.setCameraPointOfInterest(0, 2, 6);
 	cam.calculateCameraMatrix();
 	cam.setThinLensFocalPlaneDistance(10);
-	cam.setThinLensRadius(0.8);
+	cam.setThinLensRadius(1);
 	cam.setThinLensViewPlaneDistance(1);
 }
 

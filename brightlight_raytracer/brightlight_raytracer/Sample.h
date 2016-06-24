@@ -62,8 +62,8 @@ public:
 			diskSamples[i].x = x * sqrt(1 - (y*y) / 2);
 			diskSamples[i].y = y * sqrt(1 - (x*x) / 2);
 
-			diskSamples[i].x = (diskSamples[i].x + 1) / 2;
-			diskSamples[i].y = (diskSamples[i].y + 1) / 2;
+			//diskSamples[i].x = (diskSamples[i].x + 1) / 2;
+			//diskSamples[i].y = (diskSamples[i].y + 1) / 2;
 		}
 	}
 

@@ -80,11 +80,11 @@ public:
 		Vector bx(cam.cameraMatrix.m[0][0], cam.cameraMatrix.m[0][1], cam.cameraMatrix.m[0][2], 0);
 		Vector by(cam.cameraMatrix.m[1][0], cam.cameraMatrix.m[1][1], cam.cameraMatrix.m[1][2], 0);
 		Vector bz(cam.cameraMatrix.m[2][0], cam.cameraMatrix.m[2][1], cam.cameraMatrix.m[2][2], 0);
-		
+
 		Vector primaryRay = (bx * (px - cx)) + (by * (py - cy)) + (bz * f);
 		primaryRay.normalize();
 
-		rayOrigin = cam.cameraOrigin + (bx * cx) + (by * cy) + bz;
+		rayOrigin = cam.cameraOrigin + (bx * cx) + (by * cy);
 
 		return primaryRay;
 	}
