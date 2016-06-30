@@ -107,7 +107,6 @@
     <ClCompile Include="Plane.cpp" />
     <ClCompile Include="Point_2D.cpp" />
     <ClCompile Include="RayTracer.cpp" />
-    <ClCompile Include="RaytracingObject.cpp" />
     <ClCompile Include="RGB.cpp" />
     <ClCompile Include="Sample.cpp" />
     <ClCompile Include="Shade.cpp" />

@@ -4,6 +4,8 @@
 #include "Point_2D.h"
 #include "Plane.h"
 #include "Material.h"
+#include "Matte.h"
+#include "Lambertian.h"
 #include <float.h>
 #include <iostream>
 #include <ctime>
@@ -44,26 +46,60 @@ void RayTracer::setSamples() {
 void RayTracer::createGeometricObjects() {
 	cout << "Loading geometric objects..." << endl;
 	objects.push_back(new Sphere);
-	((Sphere*)objects[objects.size() - 1])->setOrigin(-4, 2, 2);
-	((Sphere*)objects[objects.size() - 1])->setColor(200, 100, 0);
-	((Sphere*)objects[objects.size() - 1])->setRadius(2);
+	objects[objects.size() - 1]->setOrigin(-4, 2, 2);
+	objects[objects.size() - 1]->setColor(200, 100, 0);
+	objects[objects.size() - 1]->setRadius(2);
+
+	RGB sphereColor = objects[objects.size() - 1]->getColor();
+	Material *mat = new Matte;
+	mat->getAmbientBRDF()->setDiffuseColor(sphereColor.r, sphereColor.g, sphereColor.b);
+	mat->getAmbientBRDF()->setDiffuseReflectionCoefficient(0.1);
+	mat->getDiffuseBRDF()->setDiffuseColor(sphereColor.r, sphereColor.g, sphereColor.b);
+	mat->getDiffuseBRDF()->setDiffuseReflectionCoefficient(0.5);
+	objects[objects.size() - 1]->setMaterial(mat);
 
 	objects.push_back(new Sphere);
-	((Sphere*)objects[objects.size() - 1])->setOrigin(0, 2, 5);
-	((Sphere*)objects[objects.size() - 1])->setColor(0, 100, 220);
-	((Sphere*)objects[objects.size() - 1])->setRadius(2);
+	objects[objects.size() - 1]->setOrigin(0, 2, 5);
+	objects[objects.size() - 1]->setColor(0, 100, 220);
+	objects[objects.size() - 1]->setRadius(2);
+
+	sphereColor = objects[objects.size() - 1]->getColor();
+	mat = new Matte;
+	mat->getAmbientBRDF()->setDiffuseColor(sphereColor.r, sphereColor.g, sphereColor.b);
+	mat->getAmbientBRDF()->setDiffuseReflectionCoefficient(0.1);
+	mat->getDiffuseBRDF()->setDiffuseColor(sphereColor.r, sphereColor.g, sphereColor.b);
+	mat->getDiffuseBRDF()->setDiffuseReflectionCoefficient(0.5);
+	objects[objects.size() - 1]->setMaterial(mat);
 
 	objects.push_back(new Sphere);
-	((Sphere*)objects[objects.size() - 1])->setOrigin(6, 2, 10);
-	((Sphere*)objects[objects.size() - 1])->setColor(50, 200, 20);
-	((Sphere*)objects[objects.size() - 1])->setRadius(2);
+	objects[objects.size() - 1]->setOrigin(6, 2, 10);
+	objects[objects.size() - 1]->setColor(50, 200, 20);
+	objects[objects.size() - 1]->setRadius(2);
+
+	sphereColor = objects[objects.size() - 1]->getColor();
+	mat = new Matte;
+	mat->getAmbientBRDF()->setDiffuseColor(sphereColor.r, sphereColor.g, sphereColor.b);
+	mat->getAmbientBRDF()->setDiffuseReflectionCoefficient(0.1);
+	mat->getDiffuseBRDF()->setDiffuseColor(sphereColor.r, sphereColor.g, sphereColor.b);
+	mat->getDiffuseBRDF()->setDiffuseReflectionCoefficient(0.5);
+	objects[objects.size() - 1]->setMaterial(mat);
 
 	objects.push_back(new Plane);
-	((Plane*)objects[objects.size() - 1])->setPlaneNormal(0, 1, 0);
-	((Plane*)objects[objects.size() - 1])->setColor(200, 200, 220);
-	((Plane*)objects[objects.size() - 1])->setPointOnPlane(0, 0, 0);
-	((Plane*)objects[objects.size() - 1])->setCheckered(true);
+	objects[objects.size() - 1]->setPlaneNormal(0, 1, 0);
+	objects[objects.size() - 1]->setColor(200, 200, 220);
+	objects[objects.size() - 1]->setPointOnPlane(0, 0, 0);
+	objects[objects.size() - 1]->setCheckered(true);
 
+	//create material for plane
+	RGB planeColor = objects[objects.size() - 1]->getColor();
+	mat = new Matte;
+	mat->getAmbientBRDF()->setDiffuseColor(planeColor.r, planeColor.g, planeColor.b);
+	mat->getAmbientBRDF()->setDiffuseReflectionCoefficient(0.1);
+	mat->getDiffuseBRDF()->setDiffuseColor(planeColor.r, planeColor.g, planeColor.b);
+	mat->getDiffuseBRDF()->setDiffuseReflectionCoefficient(0.5);
+	objects[objects.size() - 1]->setMaterial(mat);
+	
+	RaytracingObject* obj = objects[objects.size() - 1];
 }
 
 void RayTracer::render() {
@@ -118,15 +154,23 @@ void RayTracer::render() {
 					if (depth < minDepth) {
 						object = objects[i];
 						minDepth = depth;
+						material = object->getMaterial();
 					}
 				}
 
 				if (object != NULL) {
-					rgb += object->getColor();
+					rgb += material->shade();
 				}
 			}
 
 			rgb /= sample.numberOfSamples;
+
+			//clamp rgb (very crude)
+			double maxNum = max(max(rgb.r, rgb.g), rgb.b);
+			if (maxNum > 255) {
+				rgb /= maxNum;
+			}
+
 			bmp.setPixelColor(x, y, (unsigned char)rgb.r, (unsigned char)rgb.g, (unsigned char)rgb.b);
 		}
 	}

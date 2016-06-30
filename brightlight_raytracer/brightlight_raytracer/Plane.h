@@ -18,8 +18,10 @@ public:
 	Material *material;
 
 	Plane();
+	~Plane();
 
 	Material* getMaterial();
+	void setMaterial(Material* mat);
 	void setCheckered(bool setFlag);
 	void setPointOnPlane(double x, double y, double z);
 	void setPlaneNormal(double x, double y, double z);

@@ -14,8 +14,13 @@ public:
 	double yOrigin;
 	double zOrigin;
 	RGB rgb;
+	Material *material;
 
 	Sphere();
+	~Sphere();
+
+	Material* getMaterial();
+	void setMaterial(Material* mat);
 	void setRadius(double r);
 	void setOrigin(double x, double y, double z);
 	void setColor(unsigned char r, unsigned char g, unsigned char b);

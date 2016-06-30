@@ -8,6 +8,14 @@ Plane::Plane() {
 	material = NULL;
 }
 
+Plane::~Plane() {
+	delete material;
+}
+
+void Plane::setMaterial(Material* mat) {
+	material = mat;
+};
+
 Material* Plane::getMaterial() {
 	return material;
 }

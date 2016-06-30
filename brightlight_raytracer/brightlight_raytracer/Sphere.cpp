@@ -10,6 +10,18 @@ Sphere::Sphere() {
 	rgb.b = 0;
 }
 
+Sphere::~Sphere() {
+	delete material;
+}
+
+void Sphere::setMaterial(Material* mat) {
+	material = mat;
+};
+
+Material* Sphere::getMaterial() {
+	return material;
+}
+
 void Sphere::setRadius(double r) {
 	radius = r;
 }

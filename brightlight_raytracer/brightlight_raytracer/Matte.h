@@ -10,6 +10,9 @@ public:
 	BRDF *ambientBRDF;
 	BRDF *diffuseBRDF;
 
+	BRDF* getAmbientBRDF();
+	BRDF* getDiffuseBRDF();
+
 	inline RGB shade() {
 		RGB rgb;
 

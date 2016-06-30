@@ -92,9 +92,6 @@
     <ClCompile Include="RayTracer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="RaytracingObject.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="RGB.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
