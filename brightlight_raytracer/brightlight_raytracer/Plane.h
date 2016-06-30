@@ -4,6 +4,7 @@
 #include <float.h>
 #include <math.h>
 #include "Vector.h"
+#include "Material.h"
 using namespace blvector;
 
 class Plane : public RaytracingObject{
@@ -14,9 +15,11 @@ public:
 	Vector planeNormal;
 	RGB rgb;
 	bool checkered;
+	Material *material;
 
 	Plane();
 
+	Material* getMaterial();
 	void setCheckered(bool setFlag);
 	void setPointOnPlane(double x, double y, double z);
 	void setPlaneNormal(double x, double y, double z);

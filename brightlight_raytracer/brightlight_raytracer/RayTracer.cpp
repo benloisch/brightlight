@@ -1,8 +1,9 @@
 #include "RayTracer.h"
-#include "Utilities.h"
+//#include "Utilities.h"
 #include "Sphere.h"
 #include "Point_2D.h"
 #include "Plane.h"
+#include "Material.h"
 #include <float.h>
 #include <iostream>
 #include <ctime>
@@ -86,7 +87,7 @@ void RayTracer::render() {
 
 			RGB rgb;
 			sample.jittered();
-			sample.mapSamplesToDisk();
+			//sample.mapSamplesToDisk();
 			//sample.mapDiskToHemisphere();
 
 			//for (int j = 0; j < sample.numberOfSamples; j++) {
@@ -109,6 +110,9 @@ void RayTracer::render() {
 				double minDepth = DBL_MAX;
 				double depth = DBL_MAX;
 
+				//material used for shading object that ray intersects
+				Material *material = NULL;
+
 				for (unsigned int i = 0; i < objects.size(); i++) {
 					objects[i]->intersectRay(depth, primaryRay, rayOrigin);
 					if (depth < minDepth) {
@@ -123,7 +127,7 @@ void RayTracer::render() {
 			}
 
 			rgb /= sample.numberOfSamples;
-			bmp.setPixelColor(x, y, rgb.r, rgb.g, rgb.b);
+			bmp.setPixelColor(x, y, (unsigned char)rgb.r, (unsigned char)rgb.g, (unsigned char)rgb.b);
 		}
 	}
 

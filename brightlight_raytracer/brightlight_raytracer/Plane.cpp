@@ -4,6 +4,12 @@ Plane::Plane() {
 	rgb.r = 0;
 	rgb.g = 0;
 	rgb.b = 0;
+
+	material = NULL;
+}
+
+Material* Plane::getMaterial() {
+	return material;
 }
 
 void Plane::setCheckered(bool setFlag) {
