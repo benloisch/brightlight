@@ -16,6 +16,14 @@ public:
 		return rgb;
 	}
 
+	inline RGB RGB::operator+(RGB &rhs) {
+		RGB rgb;
+		rgb.r = this->r + rhs.r;
+		rgb.g = this->g + rhs.g;
+		rgb.b = this->b + rhs.b;
+		return rgb;
+	}
+
 	inline RGB RGB::operator*(double rhs) {
 		RGB rgb;
 		rgb.r = r * rhs;

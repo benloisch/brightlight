@@ -20,6 +20,9 @@ public:
 	Plane();
 	~Plane();
 
+	inline Vector getNormal() {
+		return planeNormal;
+	}
 	Material* getMaterial();
 	void setMaterial(Material* mat);
 	void setCheckered(bool setFlag);

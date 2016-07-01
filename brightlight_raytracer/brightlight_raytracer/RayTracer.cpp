@@ -6,13 +6,15 @@
 #include "Material.h"
 #include "Matte.h"
 #include "Lambertian.h"
+#include "AmbientLight.h"
+#include "DirectionalLight.h"
 #include <float.h>
 #include <iostream>
 #include <ctime>
 using namespace std;
 
 RayTracer::RayTracer() {
-
+	
 }
 
 void RayTracer::createImage() {
@@ -25,10 +27,10 @@ void RayTracer::createImage() {
 void RayTracer::setupCamera() {
 	cout << "Setting up camera..." << endl;
 	cam.setAspectRatio(bmp.width, bmp.height);
-	cam.setFieldOfView(90);
+	cam.setFieldOfView(65);
 	cout << "Camera has " << cam.fieldOfView * (180 / PI) << " degree field of view." << endl;
-	cam.setCameraOrigin(0, 3, -5);
-	cam.setCameraPointOfInterest(0, 2, 6);
+	cam.setCameraOrigin(0, 3, -15);
+	cam.setCameraPointOfInterest(0, 0, 0);
 	cam.calculateCameraMatrix();
 	cam.setThinLensFocalPlaneDistance(10);
 	cam.setThinLensRadius(1);
@@ -37,17 +39,29 @@ void RayTracer::setupCamera() {
 
 void RayTracer::setSamples() {
 	cout << "Initializing samples..." << endl;
-	sample.setNumberOfSamples(16);
+	sample.setNumberOfSamples(1);
 	cout << "Rendering with " << sample.numberOfSamples << " samples per pixel." << endl;
 	sample.initializeHemisphereSamples();
 	sample.setE(2.718281828459);
 }
 
+void RayTracer::setupLights() {
+	ambientLight.push_back(new AmbientLight);
+	ambientLight[ambientLight.size() - 1]->setLightColor(10, 10, 10);
+	ambientLight[ambientLight.size() - 1]->setRadianceScalingFactor(0.5);
+
+	directionalLights.push_back(new DirectionalLight);
+	directionalLights[directionalLights.size() - 1]->setLightColor(10, 10, 10);
+	directionalLights[directionalLights.size() - 1]->setRadianceScalingFactor(1);
+	directionalLights[directionalLights.size() - 1]->setLightDirection(-1, -1, 0);
+
+}
+
 void RayTracer::createGeometricObjects() {
 	cout << "Loading geometric objects..." << endl;
 	objects.push_back(new Sphere);
-	objects[objects.size() - 1]->setOrigin(-4, 2, 2);
-	objects[objects.size() - 1]->setColor(200, 100, 0);
+	objects[objects.size() - 1]->setOrigin(-6, 2, 0);
+	objects[objects.size() - 1]->setColor(100, 50, 0);
 	objects[objects.size() - 1]->setRadius(2);
 
 	RGB sphereColor = objects[objects.size() - 1]->getColor();
@@ -59,8 +73,8 @@ void RayTracer::createGeometricObjects() {
 	objects[objects.size() - 1]->setMaterial(mat);
 
 	objects.push_back(new Sphere);
-	objects[objects.size() - 1]->setOrigin(0, 2, 5);
-	objects[objects.size() - 1]->setColor(0, 100, 220);
+	objects[objects.size() - 1]->setOrigin(0, 2, 4);
+	objects[objects.size() - 1]->setColor(0, 20, 80);
 	objects[objects.size() - 1]->setRadius(2);
 
 	sphereColor = objects[objects.size() - 1]->getColor();
@@ -73,7 +87,7 @@ void RayTracer::createGeometricObjects() {
 
 	objects.push_back(new Sphere);
 	objects[objects.size() - 1]->setOrigin(6, 2, 10);
-	objects[objects.size() - 1]->setColor(50, 200, 20);
+	objects[objects.size() - 1]->setColor(50, 100, 20);
 	objects[objects.size() - 1]->setRadius(2);
 
 	sphereColor = objects[objects.size() - 1]->getColor();
@@ -86,7 +100,7 @@ void RayTracer::createGeometricObjects() {
 
 	objects.push_back(new Plane);
 	objects[objects.size() - 1]->setPlaneNormal(0, 1, 0);
-	objects[objects.size() - 1]->setColor(200, 200, 220);
+	objects[objects.size() - 1]->setColor(100, 100, 120);
 	objects[objects.size() - 1]->setPointOnPlane(0, 0, 0);
 	objects[objects.size() - 1]->setCheckered(true);
 
@@ -115,13 +129,13 @@ void RayTracer::render() {
 			clock_t end = clock();
 			double elapsed_secs = double(end - begin) / CLOCKS_PER_SEC;
 			if (elapsed_secs * bmp.height < 60)
-				std::cout << "Image will be rendered in approximately " << elapsed_secs * bmp.height << " seconds..." << endl;
+				std::cout << "Image will be rendered in approximately " << 3 * elapsed_secs * bmp.height << " seconds..." << endl;
 			else
-				std::cout << "Image will be rendered in approximately " << elapsed_secs * bmp.height / 60 << " minutes..." << endl;
+				std::cout << "Image will be rendered in approximately " << 3 * elapsed_secs * bmp.height / 60 << " minutes..." << endl;
 		}
 		for (unsigned int x = 0; x < bmp.width; x++) {
 
-			RGB rgb;
+			RGB rgb(20, 20, 20);
 			sample.jittered();
 			//sample.mapSamplesToDisk();
 			//sample.mapDiskToHemisphere();
@@ -138,8 +152,8 @@ void RayTracer::render() {
 				//bmp.setPixelColor(sample.hemisphereSamples[i].x * bmp.width, sample.hemisphereSamples[i].y * bmp.width, 20, sample.hemisphereSamples[i].z * 255, 20);
 
 				Vector rayOrigin;
-				//Vector primaryRay = cam.pinholeCamera(x, y, sample.samples[i].x, sample.samples[i].y, cam, bmp, rayOrigin);
-				Vector primaryRay = cam.thinlensCamera(x, y, sample.samples[i].x, sample.samples[i].y, sample.diskSamples[i].x, sample.diskSamples[i].y, cam, bmp, rayOrigin);
+				Vector primaryRay = cam.pinholeCamera(x, y, sample.samples[i].x, sample.samples[i].y, cam, bmp, rayOrigin);
+				//Vector primaryRay = cam.thinlensCamera(x, y, sample.samples[i].x, sample.samples[i].y, sample.diskSamples[i].x, sample.diskSamples[i].y, cam, bmp, rayOrigin);
 
 				//find closest object
 				RaytracingObject *object = NULL;
@@ -149,17 +163,22 @@ void RayTracer::render() {
 				//material used for shading object that ray intersects
 				Material *material = NULL;
 
+				//shade used to collect data for shading such as intersection points
+				Shade shade;
+
 				for (unsigned int i = 0; i < objects.size(); i++) {
 					objects[i]->intersectRay(depth, primaryRay, rayOrigin);
 					if (depth < minDepth) {
 						object = objects[i];
 						minDepth = depth;
 						material = object->getMaterial();
+						shade.intersectionPoint = rayOrigin + (primaryRay * depth);
+						shade.normal = object->getNormal();
 					}
 				}
 
 				if (object != NULL) {
-					rgb += material->shade();
+					rgb += material->shade(shade, ambientLight, directionalLights, pointLights);
 				}
 			}
 
@@ -169,6 +188,9 @@ void RayTracer::render() {
 			double maxNum = max(max(rgb.r, rgb.g), rgb.b);
 			if (maxNum > 255) {
 				rgb /= maxNum;
+				rgb.r *= 255;
+				rgb.g *= 255;
+				rgb.b *= 255;
 			}
 
 			bmp.setPixelColor(x, y, (unsigned char)rgb.r, (unsigned char)rgb.g, (unsigned char)rgb.b);

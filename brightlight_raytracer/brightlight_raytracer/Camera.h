@@ -36,19 +36,20 @@ public:
 
 		//convert from raster space to normalized device coordinate space
 
-		double xPixelNDC = samplex / bmp.width;
-		double yPixelNDC = sampley / bmp.height;
+		double xPixelNDC = (double)x / bmp.width;
+		double yPixelNDC = (double)y / bmp.height;
 
 		//convert from NDC space to screen space
 		double xPixelScreen = ((2 * xPixelNDC) - 1) * cam.aspectRatio * tan(cam.fieldOfView / 2);
 		double yPixelScreen = 1 - (2 * yPixelNDC) * tan(cam.fieldOfView / 2);
 
 		Vector primaryRay(xPixelScreen, yPixelScreen, 1, 0);
-		primaryRay.normalize();
+		//primaryRay.normalize();
 
-		rayOrigin.x = cam.cameraMatrix.m[3][0];
-		rayOrigin.y = cam.cameraMatrix.m[3][1];
-		rayOrigin.z = cam.cameraMatrix.m[3][2];
+		rayOrigin = cam.cameraOrigin;
+
+		primaryRay = primaryRay * cam.cameraMatrix;
+		primaryRay.normalize();
 
 		return primaryRay;
 	}

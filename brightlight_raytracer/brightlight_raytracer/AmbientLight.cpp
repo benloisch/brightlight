@@ -10,6 +10,18 @@ void AmbientLight::setLightColor(double r, double g, double b) {
 	lightColor.b = b;
 }
 
-void AmbientLight::setRadianceScalingFactor(double factor) {
-	radianceScalingFactor = factor;
+void AmbientLight::setRadianceScalingFactor(double i) {
+	radianceScalingFactor = i;
+}
+
+double AmbientLight::getRadianceScalingFactor() {
+	return radianceScalingFactor;
+}
+
+RGB AmbientLight::getLightColor() {
+	return lightColor;
+}
+
+RGB AmbientLight::getLightRadiance() {
+	return lightColor * radianceScalingFactor;
 }

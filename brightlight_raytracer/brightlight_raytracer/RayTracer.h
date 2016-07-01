@@ -3,6 +3,7 @@
 #include "ImageBMP.h"
 #include "Camera.h"
 #include "Sample.h"
+#include "Light.h"
 #include <vector>
 using namespace std;
 
@@ -15,6 +16,9 @@ public:
 	ImageBMP bmp;
 	vector<RaytracingObject*> objects;
 	Sample sample;
+	vector<Light*> ambientLight;
+	vector<Light*> directionalLights;
+	vector<Light*> pointLights;
 
 	RayTracer();
 	~RayTracer();
@@ -22,6 +26,7 @@ public:
 	void createImage();
 	void setupCamera();
 	void setSamples();
+	void setupLights();
 	void createGeometricObjects();
 	void render();
 	void saveImage();

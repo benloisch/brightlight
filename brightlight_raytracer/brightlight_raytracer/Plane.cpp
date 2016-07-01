@@ -28,6 +28,7 @@ void Plane::setPlaneNormal(double x, double y, double z) {
 	planeNormal.x = x;
 	planeNormal.y = y;
 	planeNormal.z = z;
+	planeNormal.normalize();
 }
 
 void Plane::setPointOnPlane(double x, double y, double z) {

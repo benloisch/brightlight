@@ -78,6 +78,7 @@
   <ItemGroup>
     <ClInclude Include="AmbientLight.h" />
     <ClInclude Include="BRDF.h" />
+    <ClInclude Include="DirectionalLight.h" />
     <ClInclude Include="Lambertian.h" />
     <ClInclude Include="Light.h" />
     <ClInclude Include="Material.h" />
@@ -99,6 +100,7 @@
   <ItemGroup>
     <ClCompile Include="AmbientLight.cpp" />
     <ClCompile Include="Camera.cpp" />
+    <ClCompile Include="DirectionalLight.cpp" />
     <ClCompile Include="ImageBMP.cpp" />
     <ClCompile Include="Lambertian.cpp" />
     <ClCompile Include="main.cpp" />
@@ -109,7 +111,6 @@
     <ClCompile Include="RayTracer.cpp" />
     <ClCompile Include="RGB.cpp" />
     <ClCompile Include="Sample.cpp" />
-    <ClCompile Include="Shade.cpp" />
     <ClCompile Include="Sphere.cpp" />
     <ClCompile Include="Vector.cpp" />
   </ItemGroup>

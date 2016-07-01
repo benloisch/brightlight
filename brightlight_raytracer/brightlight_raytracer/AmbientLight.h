@@ -7,12 +7,13 @@ class AmbientLight : public Light
 public:
 
 	RGB lightColor;
-	Vector lightDirection;
-	Vector lightOrigin;
 	double radianceScalingFactor;
 
 	AmbientLight();
+	void setRadianceScalingFactor(double i);
 	void setLightColor(double r, double g, double b);
-	void setRadianceScalingFactor(double factor);
+	double getRadianceScalingFactor();
+	RGB getLightColor();
+	RGB getLightRadiance();
 
 };

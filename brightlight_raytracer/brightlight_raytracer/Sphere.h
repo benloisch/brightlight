@@ -15,10 +15,14 @@ public:
 	double zOrigin;
 	RGB rgb;
 	Material *material;
+	Vector storedNormal;
 
 	Sphere();
 	~Sphere();
 
+	inline Vector getNormal() {
+		return storedNormal;
+	}
 	Material* getMaterial();
 	void setMaterial(Material* mat);
 	void setRadius(double r);
@@ -52,5 +56,8 @@ public:
 		}
 
 		//depth gets returned through parameter
+		//set normal at currect intersection point before leaving function
+		storedNormal = (rayOrigin + (rayIn * depth)) - Vector(xOrigin, yOrigin, zOrigin, 0);
+		storedNormal.normalize();
 	}
 };

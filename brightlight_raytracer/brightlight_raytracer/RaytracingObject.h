@@ -14,6 +14,7 @@ public:
 	inline virtual void intersectRay(double &depth, Vector rayIn, Vector rayOrigin) = 0;
 	inline virtual void setColor(unsigned char r, unsigned char g, unsigned char b) = 0;
 	inline virtual RGB getColor() = 0;
+	inline virtual Vector getNormal() = 0;
 
 	//methods for materials
 	virtual void setMaterial(Material* mat) {};
