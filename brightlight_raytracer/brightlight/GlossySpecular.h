@@ -15,6 +15,6 @@ public:
 
 	inline double calculateBRDF(Vector &wi, Vector &normal, Vector &wo) {
 		Vector r = ((wi * -1) + (normal * ((normal * wi) * 2)));
-		return specularReflectionCoefficient * pow(abs((r * wo)), phongExponent);
+		return specularReflectionCoefficient * pow(fabs((r * wo)), phongExponent);
 	}
 };
