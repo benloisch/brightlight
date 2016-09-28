@@ -248,7 +248,7 @@ void RayTracer::render() {
 					shade.wo = primaryRay * -1;
 					shade.colorOfObject = object->getColor();
 					shade.sample = &sample;
-					if (object->getTag() == "arealight") {
+					if (object->getTag() == "arealight") { //if ray hits the area light, then just return a white color for the light its-self
 						rgb += object->getColor();
 					}
 					else {

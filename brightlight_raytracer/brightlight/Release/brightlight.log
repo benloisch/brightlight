@@ -1,8 +1,5 @@
-﻿  GlossySpecular.cpp
-  Phong.cpp
-  RayTracer.cpp
-  main.cpp
-  Generating code
+﻿  Generating code
   All 571 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
   Finished generating code
   brightlight.vcxproj -> C:\Users\Ben Loisch\Documents\GitHub\Repository\brightlight\brightlight_raytracer\Release\brightlight.exe
+  brightlight.vcxproj -> C:\Users\Ben Loisch\Documents\GitHub\Repository\brightlight\brightlight_raytracer\Release\brightlight.pdb (Full PDB)
